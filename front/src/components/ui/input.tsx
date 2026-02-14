@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { ThemeContext } from "../../contexts/use-theme"
+import { ThemeContext } from "../../contexts/theme-context"
 import { Eye, EyeOff } from "lucide-react"
 
 interface Props {

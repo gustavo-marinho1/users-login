@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ThemeContext } from "../../contexts/use-theme";
+import { ThemeContext } from "../../contexts/theme-context";
 
 export const Footer = () => {
   const { theme, isLight } = useContext(ThemeContext);

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ThemeToggle } from "../ui/theme-toggle"
-import { ThemeContext } from "../../contexts/use-theme";
+import { ThemeContext } from "../../contexts/theme-context";
 
 export const Header = () => {
   const { theme, isLight } = useContext(ThemeContext);
