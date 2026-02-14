@@ -6,7 +6,7 @@ export const Footer = () => {
 
   return (
     <footer className="p-3 shadow-inner" style={{
-      backgroundColor: isLight ? theme.bg1 : theme.bg3,
+      backgroundColor: isLight ? theme.bg2 : theme.bg3,
       color: theme.text1
     }}>
       Footer

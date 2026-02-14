@@ -9,7 +9,7 @@ const Main = ({children}: Props) => {
   const { theme, isLight } = useContext(ThemeContext);
   return (
     <main className="flex-[1] w-screen flex flex-col justify-between" style={{
-      backgroundColor: isLight ? theme.bg2 : theme.bg1,
+      backgroundColor: isLight ? theme.bg1 : theme.bg1,
       color: theme.text1
     }}>
       {children}
