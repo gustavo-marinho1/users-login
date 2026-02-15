@@ -8,10 +8,12 @@ interface Props {
   password?: boolean
   label?: string
   value?: string
-  setValue?: (v: string) => void
+  setValue?: (v: string) => void,
+  error?: boolean,
+  disabled?: boolean
 }
 
-export const Input = ({id, name, password, label, value, setValue}: Props) => {
+export const Input = ({id, name, password, label, value, setValue, error, disabled}: Props) => {
   const { theme, isLight } = useContext(ThemeContext);
   const [hide, setHide] = useState<boolean>(true);
 
@@ -28,7 +30,8 @@ export const Input = ({id, name, password, label, value, setValue}: Props) => {
         <input
           id={id}
           name={name}
-          value={value}
+          value={value ?? ""}
+          disabled={disabled}
           type={password && hide ? "password" : undefined}
           onChange={(e) => {
             if (setValue) setValue(e.target.value);
@@ -38,7 +41,7 @@ export const Input = ({id, name, password, label, value, setValue}: Props) => {
           `}
           style={{
             backgroundColor: isLight ? theme.bg1 : theme.bg2,
-            borderColor: isLight ? theme.border3 : theme.border4,
+            borderColor: error ? "rgb(255,72,72)" : (isLight ? theme.border3 : theme.border4),
             padding: !password ? "6px 8px" : "6px 33px 6px 8px"
           }}
         />

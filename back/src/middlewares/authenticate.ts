@@ -4,7 +4,7 @@ import type { JWTUser } from "../models/user.js";
 import { isTokenValid } from "../utils/token.js";
 
 async function authenticate(req: FastifyRequest, reply: FastifyReply) {
-  const token = req.headers.authorization?.replace("Bearer ", "");
+  const token = req.cookies.auth_token;
   if (!token) {
     return reply.status(401).send({ message: "Token not provided", data: undefined});
   }

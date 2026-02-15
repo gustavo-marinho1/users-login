@@ -1,15 +1,27 @@
 import { createContext, useState } from "react";
+import type { UserLogin } from "../types/user";
 
-export const UserContext = createContext({
-  user: undefined as any,
-  setUser: (user: any) => {}
+interface Context {
+  user: UserLogin | undefined,
+  setUser: (u: UserLogin) => void,
+  cleanUser: () => void,
+}
+
+export const UserContext = createContext<Context>({
+  user: undefined,
+  setUser: (u: UserLogin) => {},
+  cleanUser: () => {},
 });
 
 const UserProvider = ({children}: {children: React.ReactNode}) => {
   const [user, setUser] = useState<any>(undefined);
 
+  function cleanUser() {
+    setUser(undefined);
+  }
+
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, cleanUser }}>
       {children}
     </UserContext.Provider>
   )

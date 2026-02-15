@@ -1,9 +1,13 @@
 import Fastify from "fastify";
+import FastifyCors from "@fastify/cors";
+import FastifyCookie from "@fastify/cookie";
 import UserRoutes from "./routes/user.js";
-import fastifyCors from "@fastify/cors";
 import type { JWTUser } from "./models/user.js";
+import AuthRoutes from "./routes/auth.js";
 
-const server = Fastify();
+const server = Fastify({
+  logger: true
+});
 
 declare module "fastify" {
   export interface FastifyRequest {
@@ -12,9 +16,21 @@ declare module "fastify" {
 }
 
 // cors
-server.register(fastifyCors);
+server.register(FastifyCors, {
+  origin: "http://localhost:5173",
+  credentials: true, 
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD'],
+});
+
+// cookies
+server.register(FastifyCookie, {
+  secret: String(process.env.COOKIE_SECRET),
+  hook: 'onRequest',
+  
+});
 
 // routes
 server.register(UserRoutes);
+server.register(AuthRoutes);
 
 export default server;
