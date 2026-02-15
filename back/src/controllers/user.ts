@@ -33,10 +33,10 @@ async function controllerRegister (req: FastifyRequest, reply: FastifyReply) {
   }
 }
 
-async function controlletMe (req: FastifyRequest, reply: FastifyReply) {
+async function controllerMe (req: FastifyRequest, reply: FastifyReply) {
   try {
     if (!req.user) {
-      throw new Error("Error auth");
+      throw new Error("Error authentication");
     }
     const id = req.user.id;
     const data = await serviceGetUserInfo(id);
@@ -47,4 +47,4 @@ async function controlletMe (req: FastifyRequest, reply: FastifyReply) {
   }
 }
 
-export { controllerLogin, controllerRegister, controlletMe}
+export { controllerLogin, controllerRegister, controllerMe}

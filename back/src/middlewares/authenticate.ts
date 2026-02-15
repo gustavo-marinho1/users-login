@@ -1,16 +1,21 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import jwt from "jsonwebtoken";
 import type { JWTUser } from "../models/user.js";
+import { isTokenValid } from "../utils/token.js";
 
-async function authenticate(request: FastifyRequest, _: FastifyReply) {
-  const token = request.headers.authorization?.replace("Bearer ", "");
-
+async function authenticate(req: FastifyRequest, reply: FastifyReply) {
+  const token = req.headers.authorization?.replace("Bearer ", "");
   if (!token) {
-    throw new Error("Authorization error");
+    return reply.status(401).send({ message: "Token not provided", data: undefined});
+  }
+
+  const valid = isTokenValid(token);
+  if (!valid) {
+    return reply.status(401).send({ message: "Token not valid", data: undefined});
   }
 
   const decodedJwt = jwt.verify(token, String(process.env.JWT_SECRET)) as JWTUser;
-  request.user = decodedJwt;
+  req.user = decodedJwt;
 }
 
 export { authenticate }
