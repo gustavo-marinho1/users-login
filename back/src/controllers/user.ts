@@ -8,11 +8,15 @@ async function controllerMe (req: FastifyRequest, reply: FastifyReply) {
     }
     const id = req.user.id;
     const data = await serviceGetUserInfo(id);
-    reply.status(200).send({ message: "Me", data: data});
+    reply
+      .status(200)
+      .send({ message: "Me", data: data});
   }
   catch (error: Error | any) {
-    reply.status(401).send({ message: error.message, data: undefined });
+    reply
+      .status(401)
+      .send({ message: error.message, data: undefined });
   }
 }
 
-export { controllerMe}
+export { controllerMe }

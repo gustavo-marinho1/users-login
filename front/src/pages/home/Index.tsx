@@ -1,31 +1,12 @@
-import { useContext, useEffect } from "react"
-import { UserContext } from "../../contexts/user-context"
-import { me } from "../../services/me";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/user-context";
 
 export default function Home() {
 
-  const { user, setUser } = useContext(UserContext);
-
-  const getMe = async () => {
-    try {
-      const res = await me();
-      setUser(res);
-    }
-    catch {
-      //
-    }
-  }
-
-  useEffect(() => {
-    getMe();
-  }, []);
-
-  useEffect(() => {
-    console.log(user)
-  }, [user]);
+  const { user } = useContext(UserContext);
 
   return (
-    <div>
+    <div className="">
       {user ? (
         <p>Hi, {user.name}</p>
       ) : (

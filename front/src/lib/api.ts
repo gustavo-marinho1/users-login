@@ -14,14 +14,16 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.data) {
-      const mensagemDoBackend = error.response.data.error || error.response.data.message;
-      if (mensagemDoBackend) {
-        error.message = mensagemDoBackend;
+      const message = error.response.data.error || error.response.data.message;
+      if (message) {
+        error.message = message;
       }
     }
 
-    if (error.response && error.response.status === 401) {
-      localStorage.removeItem("auth_token");
+    if (error.response.data && error.response.data.redirect) {
+      if (typeof window !== 'undefined' && window.location.pathname !== '/login') {
+        window.location.href = '/login';
+      }
     }
 
     return Promise.reject(error);

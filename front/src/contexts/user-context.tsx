@@ -9,12 +9,12 @@ interface Context {
 
 export const UserContext = createContext<Context>({
   user: undefined,
-  setUser: (u: UserLogin) => {},
+  setUser: () => {},
   cleanUser: () => {},
 });
 
 const UserProvider = ({children}: {children: React.ReactNode}) => {
-  const [user, setUser] = useState<any>(undefined);
+  const [user, setUser] = useState<UserLogin | undefined>(undefined);
 
   function cleanUser() {
     setUser(undefined);

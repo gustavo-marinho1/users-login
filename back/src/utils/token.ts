@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
 
+const COOKIE_AUTH_TOKEN = "auth_token";
+
 async function generateToken(id: number, email: string) {
   return jwt.sign({id, email}, String(process.env.JWT_SECRET), {
     expiresIn: "1day"
@@ -12,8 +14,8 @@ const isTokenValid = (token: string) => {
     return true
   }
   catch (error) {
-    return false;
+    return false
   }
 };
 
-export { generateToken, isTokenValid }
+export { generateToken, isTokenValid, COOKIE_AUTH_TOKEN }

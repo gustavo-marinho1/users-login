@@ -1,5 +1,6 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
-import { serviceCreateUser, serviceLogin } from "../services/auth.js";
+import { serviceRegister, serviceLogin } from "../services/auth.js";
+import { COOKIE_AUTH_TOKEN } from "../utils/token.js";
 
 async function controllerLogin (req: FastifyRequest, reply: FastifyReply) {
   // @ts-ignore
@@ -11,7 +12,7 @@ async function controllerLogin (req: FastifyRequest, reply: FastifyReply) {
     const data = await serviceLogin(email, password);
     reply
       .status(200)
-      .setCookie('auth_token', data.token, {
+      .setCookie(COOKIE_AUTH_TOKEN, data.token, {
         path: '/',
         httpOnly: true,
         secure: true,
@@ -27,7 +28,6 @@ async function controllerLogin (req: FastifyRequest, reply: FastifyReply) {
   }
 }
 
-
 async function controllerRegister (req: FastifyRequest, reply: FastifyReply) {
   // @ts-ignore
   const { name, email, password } = req.body;
@@ -35,8 +35,17 @@ async function controllerRegister (req: FastifyRequest, reply: FastifyReply) {
     if (!name || !email || !password) {
       throw new Error("Required data not provided");
     }
-    const data = await serviceCreateUser(name, email, password);
-    reply.status(200).send({ message: "User created", data: data});
+    const data = await serviceRegister(name, email, password);
+    reply
+    .status(200)
+    .setCookie(COOKIE_AUTH_TOKEN, data.token, {
+      path: '/',
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+      maxAge: 60 * 60 * 24
+    })
+    .send({ message: "User created", data: data.user});
   }
   catch (error: Error | any) {
     reply.status(401).send({ message: error.message, data: undefined });

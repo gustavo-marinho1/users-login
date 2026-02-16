@@ -27,7 +27,7 @@ async function serviceLogin(email: string, password: string) {
   }
 }
 
-async function serviceCreateUser(name: string, email: string, password: string) {
+async function serviceRegister(name: string, email: string, password: string) {
   const userExists = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
   if (userExists.rows[0]) {
     throw new Error("Email already registered");
@@ -47,11 +47,13 @@ async function serviceCreateUser(name: string, email: string, password: string) 
   const token = await generateToken(newUser.id, newUser.email);
 
   return {
-    id: newUser.id,
-    name: newUser.name,
-    email: newUser.email,
+    user: {
+      id: newUser.id,
+      name: newUser.name,
+      email: newUser.email
+    },
     token: token
   }
 }
 
-export { serviceLogin, serviceCreateUser }
+export { serviceLogin, serviceRegister }
