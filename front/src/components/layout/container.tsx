@@ -1,24 +1,13 @@
-import { useContext } from "react";
-import { ThemeContext } from "../../contexts/theme-context";
-
 interface Props {
   children: React.ReactNode
 }
 
-export const Container = ({children}: Props) => {
-
-  const { theme, isLight } = useContext(ThemeContext);
-
+const Container = ({children}: Props) => {
   return (
-    <div
-      className="border rounded-xl"
-      style={{
-        backgroundColor: isLight ? theme.bg1 : theme.bg3,
-        color: theme.text1,
-        borderColor: isLight ? theme.border2 : theme.border3
-      }}
-    >
+    <div className="bg-background rounded-lg border border-border overflow-hidden">
       {children}
     </div>
   )
 }
+
+export { Container }

@@ -1,9 +1,9 @@
 import { createBrowserRouter, Outlet, type RouteObject, RouterProvider } from "react-router-dom";
 import Layout from "../components/layout/layout";
-import Error from "../pages/error/Index";
 import Login from "../pages/auth/login/Index";
 import Home from "../pages/home/Index"
 import Register from "../pages/auth/register/Index";
+import Error from "../pages/error/Index";
 
 const routeList: RouteObject[] = [
   { path: "/", element: <Home /> },

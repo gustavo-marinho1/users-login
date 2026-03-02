@@ -1,15 +1,14 @@
-import { Container } from "../../../components/layout/container";
-import { Input } from "../../../components/ui/input";
-import { Button } from "../../../components/ui/button";
 import { ThemeToggle } from "../../../components/ui/theme-toggle";
 import { MainAuth } from "../../../components/layout/main";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../../../contexts/user-context";
 import { register } from "../../../services/register";
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "../../../components/ui/input";
+import { Container } from "../../../components/layout/container";
 
 interface Fields {
   name: string,
@@ -18,9 +17,9 @@ interface Fields {
 }
 
 const schema = z.object({
-  name: z.string({message: "Invalid name"}).min(1, {message: "Type you name"}),
-  email: z.email({message: "Invalid email"}).min(1, {message: "Type you email"}),
-  password: z.string({message: "Invalid password"}).min(8, {message: "Password must have at least 8 characters"})
+  name: z.string({message: "Insert your name"}).min(1, {message: "Insert your name"}),
+  email: z.email({message: "Insert your email"}).min(1, {message: "Insert your email"}),
+  password: z.string({message: "Insert your password"}).min(8, {message: "Password must have at least 8 characters"})
 });
 
 export default function Register() {
@@ -112,8 +111,9 @@ export default function Register() {
               </div>
             )}
 
-            <div className="w-full flex justify-end">
-              <Button submit loading={loading}>Register</Button>
+            <div className="w-full flex justify-between items-center gap-2">
+              <Link to="/login" className="hover:underline">Already have an account?</Link>
+              <button disabled={loading}>Register</button>
             </div>
           </form>
         </Container>

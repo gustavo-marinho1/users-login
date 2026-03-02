@@ -1,7 +1,7 @@
-import './App.css';
-import ThemeProvider from './contexts/theme-context';
-import UserProvider from './contexts/user-context';
-import Router from './router/Index';
+import './App.css'
+import ThemeProvider from './contexts/theme.context'
+import UserProvider from './contexts/user-context'
+import Router from './router/Index'
 
 function App() {
   return (

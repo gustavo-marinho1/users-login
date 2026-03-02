@@ -1,6 +1,3 @@
-import { Container } from "../../../components/layout/container";
-import { Input } from "../../../components/ui/input";
-import { Button } from "../../../components/ui/button";
 import { ThemeToggle } from "../../../components/ui/theme-toggle";
 import { MainAuth } from "../../../components/layout/main";
 import { login } from "../../../services/login";
@@ -9,7 +6,9 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext, useState } from "react";
 import { UserContext } from "../../../contexts/user-context";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Input } from "../../../components/ui/input";
+import { Container } from "../../../components/layout/container";
 
 interface Fields {
   email: string,
@@ -17,8 +16,8 @@ interface Fields {
 }
 
 const schema = z.object({
-  email: z.email({message: "Invalid email"}).min(1, {message: "Type you email"}),
-  password: z.string({message: "Invalid password"}).min(1, {message: "Type you password"})
+  email: z.email({message: "Invalid email"}).min(1, {message: "Insert your email"}),
+  password: z.string({message: "Insert your password"}).min(1, {message: "Insert your password"})
 });
 
 export default function Login() {
@@ -99,8 +98,9 @@ export default function Login() {
               </div>
             )}
 
-            <div className="w-full flex justify-end">
-              <Button submit loading={loading}>Login</Button>
+            <div className="w-full flex justify-between items-center gap-4">
+              <Link to="/register" className="hover:underline">Create account</Link>
+              <button disabled={loading}>Login</button>
             </div>
           </form>
         </Container>

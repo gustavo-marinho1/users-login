@@ -1,35 +1,18 @@
-import { useContext } from "react"
-import { ThemeContext } from "../../contexts/theme-context"
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun } from 'lucide-react';
+import { useContext } from 'react';
+import { ThemeContext } from '../../contexts/theme.context';
+import { ButtonHeaderAction } from './buttons-header';
 
-export const ThemeToggle = () => {
-
-  const { theme, isLight, setDark, setLight } = useContext(ThemeContext);
-
-  function toogle() {
-    if (isLight) {
-      setDark();
-    }
-    else {
-      setLight();
-    }
-  }
+export function ThemeToggle() {
+  const { isDark, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <button
-      type="button"
-      onClick={() => toogle()}
-      className="size-9 border rounded-md flex items-center justify-center cursor-pointer"
-      style={{
-        backgroundColor: isLight ? theme.bg1 : theme.bg3,
-        borderColor: theme.border3,
-      }}
-    >
-      {isLight ? (
-        <Sun style={{color: theme.text2}} className="size-4" />
+    <ButtonHeaderAction onClick={() => toggleTheme()}>
+      {isDark ? (
+        <Moon className="size-5" />
       ) : (
-        <Moon style={{color: theme.text2}} className="size-4" />
+        <Sun className="size-5" />
       )}
-    </button>
-  )
+    </ButtonHeaderAction>
+  );
 }

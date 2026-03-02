@@ -1,6 +1,5 @@
-import { useContext, useState } from "react"
-import { ThemeContext } from "../../contexts/theme-context"
 import { Eye, EyeOff } from "lucide-react"
+import { useState } from "react"
 
 interface Props {
   id?: string
@@ -14,19 +13,18 @@ interface Props {
 }
 
 export const Input = ({id, name, password, label, value, setValue, error, disabled}: Props) => {
-  const { theme, isLight } = useContext(ThemeContext);
   const [hide, setHide] = useState<boolean>(true);
 
   return (
     <div className="flex flex-col gap-1">
 
       {label && (
-        <label htmlFor={name} style={{ color: theme.text5 }}>
+        <label htmlFor={name}>
           {label}
         </label>
       )}
 
-      <div className="relative" style={{ color: theme.text3 }}>
+      <div className="relative">
         <input
           id={id}
           name={name}
@@ -39,11 +37,6 @@ export const Input = ({id, name, password, label, value, setValue, error, disabl
           className={`
             w-full rounded-lg border
           `}
-          style={{
-            backgroundColor: isLight ? theme.bg1 : theme.bg2,
-            borderColor: error ? "rgb(255,72,72)" : (isLight ? theme.border3 : theme.border4),
-            padding: !password ? "6px 8px" : "6px 33px 6px 8px"
-          }}
         />
         {password && (
           <div className="absolute top-0 right-0 h-full flex justify-center items-center px-2">

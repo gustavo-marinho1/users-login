@@ -1,17 +1,8 @@
-import { useContext } from "react";
-import { ThemeContext } from "../../contexts/theme-context";
 import { Link } from "react-router-dom";
 
-export default function Error() {
-  const { theme, isLight } = useContext(ThemeContext);
+function Error() {
   return (
-    <main
-      className="w-screen h-screen flex justify-center items-center"
-      style={{
-        backgroundColor: isLight ? theme.bg2 : theme.bg1,
-        color: theme.text1
-      }}
-    >
+    <main className="w-screen h-screen flex justify-center items-center">
       
       <div className="flex flex-col items-center gap-2">
         <h1 className="text-2xl">
@@ -25,3 +16,5 @@ export default function Error() {
     </main>
   )
 }
+
+export default Error;
