@@ -4,7 +4,7 @@ interface Props {
 
 const Container = ({children}: Props) => {
   return (
-    <div className="bg-background rounded-lg border border-border overflow-hidden">
+    <div className="bg-white dark:bg-neutral-900 rounded-xl border border-neutral-300/70 dark:border-neutral-700/80 overflow-hidden ">
       {children}
     </div>
   )

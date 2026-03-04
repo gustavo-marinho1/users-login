@@ -35,13 +35,16 @@ export const Input = ({id, name, password, label, value, setValue, error, disabl
             if (setValue) setValue(e.target.value);
           }}
           className={`
-            w-full rounded-lg border
+            w-full rounded-lg border border-neutral-400/80 dark:border-neutral-500/70 py-1.5 px-2
           `}
+          style={{
+            borderColor: error ? "rgb(255,80,80)" : ""
+          }}
         />
         {password && (
           <div className="absolute top-0 right-0 h-full flex justify-center items-center px-2">
             <button className="cursor-pointer" onClick={() => setHide(!hide)}>
-              {hide ? <EyeOff size={18} /> : <Eye size={18} />}
+              {hide ? <EyeOff size={16} /> : <Eye size={16} />}
             </button>
           </div>
         )}

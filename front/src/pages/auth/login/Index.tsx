@@ -52,7 +52,11 @@ export default function Login() {
       </div>
 
       {/* Bottom */}
-      <div className="flex-[1] flex justify-center items-center">
+      <div className="flex-[1] flex flex-col gap-20 justify-center items-center">
+
+        <div className="w-full flex justify-center">
+          <h1 className="text-2xl tracking-wider">MONOCHROME</h1>
+        </div>
 
         <Container>
           <form className="w-md flex flex-col gap-5 p-5" onSubmit={(e) => {
@@ -100,7 +104,7 @@ export default function Login() {
 
             <div className="w-full flex justify-between items-center gap-4">
               <Link to="/register" className="hover:underline">Create account</Link>
-              <button disabled={loading}>Login</button>
+              <button disabled={loading} className="bg-neutral-50 dark:bg-neutral-800 border border-neutral-400 dark:border-neutral-700 rounded-lg py-1.5 px-3">Login</button>
             </div>
           </form>
         </Container>
