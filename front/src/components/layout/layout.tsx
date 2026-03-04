@@ -25,16 +25,18 @@ export default function Layout() {
   }, []);
 
   return (
-    <div className="w-full min-h-screen flex flex-col justify-between bg-background text-foreground">
-      <div className="sticky z-50 w-full top-0 border-border">
-        <Header />
+    <div className="bg-gradient-to-tr from-[rgb(250,250,250)] to-[rgb(240,240,240)] dark:from-[rgb(35,35,35)] dark:to-[rgb(25,25,25)]">
+      <div className="w-full min-h-screen flex flex-col justify-between text-foreground">
+        <div className="sticky z-50 w-full top-0 border-border">
+          <Header />
+        </div>
+
+        <Main>
+          <Outlet />
+        </Main>
+
+        <Footer />
       </div>
-
-      <Main>
-        <Outlet />
-      </Main>
-
-      <Footer />
     </div>
   )
 }

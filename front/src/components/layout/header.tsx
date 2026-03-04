@@ -19,7 +19,7 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="backdrop-blur dark:text-white flex items-center justify-between gap-4 p-4">
+      <div className="backdrop-blur dark:text-white bg-[rgba(255,255,255,0.4)] dark:bg-[rgba(0,0,0,0.3)] flex items-center justify-between gap-4 p-4">
         {/* Menu */}
         <div className="w-full flex justify-start">
           <button className="md:hidden">
