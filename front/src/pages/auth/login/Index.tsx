@@ -55,7 +55,7 @@ export default function Login() {
       <div className="flex-[1] flex flex-col gap-20 justify-center items-center">
 
         <div className="w-full flex justify-center">
-          <h1 className="text-2xl tracking-wider">MONOCHROME</h1>
+        <Link to="/" className="text-2xl tracking-wider">MONOCHROME</Link>
         </div>
 
         <Container>

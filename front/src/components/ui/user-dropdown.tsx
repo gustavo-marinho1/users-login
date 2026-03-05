@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { Settings, UserCircle, LogOut } from 'lucide-react';
+import { Settings, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { Container } from '../layout/container';
+import { logout } from '../../services/logout';
 
 interface Props {
   children: React.ReactNode
@@ -23,35 +25,47 @@ const UserDropdown = ({children}: Props) => {
     };
   }, []);
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/");
+      location.reload();
+    } catch {}
+  }
+
   return (
-    <div className="relative inline-block text-left" ref={dropdownRef}>
+    <div className="relative text-left flex items-end" ref={dropdownRef}>
       
       {/* Trigger */}
-      <button onClick={() => setIsOpen(!isOpen)}>
+      <button onClick={() => setIsOpen(!isOpen)} className="">
         {children}
       </button>
 
       {/* Dropdown */}
-      <div 
-        className={`
-          absolute right-0 mt-2 w-48 origin-top-right rounded-md shadow-lg transition-all duration-200 ease-out border
-          ${isOpen
-            ? 'transform opacity-100 scale-100 translate-y-0 pointer-events-auto' 
-            : 'transform opacity-0 scale-95 -translate-y-2 pointer-events-none'
-          }
-        `}
-      >
-        <div className="p-1 flex flex-col gap-1">
-          <button onClick={() => navigate("/settings")}>
-            <Settings className="size-4" /> Settings
-          </button>
-          <button onClick={() => navigate("/profile")}>
-            <UserCircle className="size-4" /> Profile
-          </button>
-          <button onClick={() => navigate("/login")}>
-            <LogOut className="size-4" /> Logout
-          </button>
-        </div>
+      <div className={`
+        absolute right-0 top-0 mt-6 shadow-lg transition-all duration-200 ease-out
+        ${isOpen
+          ? 'transform opacity-100 scale-100 translate-y-0 pointer-events-auto' 
+          : 'transform opacity-0 scale-95 -translate-y-2 pointer-events-none'
+        }
+      `}>
+        <Container>
+          <div className="flex flex-col gap-1 py-1">
+            <button onClick={() => navigate("/settings")} className="w-full hover:bg-black/5 dark:hover:bg-white/3 transition">
+              <div className="flex items-center px-5 pr-6 py-2">
+                <Settings className="size-5 mr-2" />
+                <span>Settings</span>
+              </div>
+            </button>
+
+            <button onClick={() => handleLogout()} className="w-full hover:bg-black/5 dark:hover:bg-white/3 transition">
+              <div className="flex items-center px-5 pr-6 py-2">
+                <LogOut className="size-5 mr-2" />
+                <span>Logout</span>
+              </div>
+            </button>
+          </div>
+        </Container>
       </div>
 
     </div>

@@ -10,6 +10,10 @@ const Header = () => {
   const navigate = useNavigate();
   const { loading, user } = useContext(UserContext);
 
+  const getCartQtt = () => {
+    return 1;
+  }
+
   return (
     <header className="relative">
       
@@ -37,10 +41,14 @@ const Header = () => {
           <ButtonHeaderAction>
             <Search className="h-5 w-5" />
           </ButtonHeaderAction>
+
           {!loading && (
             user ? (
               <UserDropdown>
-                <User className="h-5 w-5" /> {user.name}
+                <div className="flex items-center gap-1">
+                  <User className="h-5 w-5" />
+                  <span>{user.name}</span>
+                </div>
               </UserDropdown>
             ) : (
               <ButtonHeaderAction onClick={() => navigate("/login")}>
@@ -48,14 +56,16 @@ const Header = () => {
               </ButtonHeaderAction>
             )
           )}
-          <ButtonHeaderAction>
+
+          <ButtonHeaderAction onClick={() => navigate("/cart")}>
             <div className="relative">
               <ShoppingBag className="h-5 w-5" />
               <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs">
-                0
+                {getCartQtt()}
               </span>
             </div>
           </ButtonHeaderAction>
+
           <ThemeToggle />
         </div>
 

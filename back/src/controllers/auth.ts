@@ -22,9 +22,29 @@ async function controllerLogin (req: FastifyRequest, reply: FastifyReply) {
       .send({ message: "Login", data: data.user });
   }
   catch (error: Error | any) {
-    console.log(error)
-    console.log(error.message)
     reply.status(401).send({ message: error.message, data: undefined });
+  }
+}
+
+async function controllerLogout (req: FastifyRequest, reply: FastifyReply) {
+  const cookieOptions = {
+    path: "/",
+    httpOnly: true,
+    secure: true,
+    sameSite: "strict" as const
+  };
+
+  try {
+    reply
+      .status(200)
+      .clearCookie(COOKIE_AUTH_TOKEN, cookieOptions)
+      .send({ message: "Logout", data: undefined });
+  }
+  catch (error: Error | any) {
+    reply
+      .status(500)
+      .clearCookie(COOKIE_AUTH_TOKEN, cookieOptions)
+      .send({ message: error.message, data: undefined });
   }
 }
 
@@ -52,4 +72,4 @@ async function controllerRegister (req: FastifyRequest, reply: FastifyReply) {
   }
 }
 
-export { controllerLogin, controllerRegister }
+export { controllerLogin, controllerLogout, controllerRegister }

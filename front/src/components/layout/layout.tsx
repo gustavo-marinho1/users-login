@@ -12,12 +12,9 @@ export default function Layout() {
   const getMe = async () => {
     try {
       const res = await me();
-      console.log(res)
       setUser(res.data);
     }
-    catch (error: Error | any) {
-      console.log(error)
-    }
+    catch {}
   }
 
   useEffect(() => {
