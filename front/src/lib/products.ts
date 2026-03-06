@@ -1,4 +1,12 @@
-const products = [
+type Product = {
+  id: number;
+  name: string;
+  price: number;
+  category: string;
+  image: string;
+};
+
+const products: Product[] = [
   {
     id: 1,
     name: 'Classic Black Leather Jacket',
@@ -57,4 +65,4 @@ const products = [
   },
 ];
 
-export { products }
+export { products, type Product }

@@ -4,9 +4,11 @@ import Login from "../pages/auth/login/Index";
 import Home from "../pages/home/Index"
 import Register from "../pages/auth/register/Index";
 import Error from "../pages/error/Index";
+import Search from "../pages/search/Index";
 
 const routeList: RouteObject[] = [
   { path: "/", element: <Home /> },
+  { path: "/search", element: <Search /> },
 ];
 
 const routes = createBrowserRouter([

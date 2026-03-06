@@ -1,10 +1,12 @@
-import { Menu, Search, ShoppingBag, User } from "lucide-react"
+import { ShoppingBag, User } from "lucide-react"
 import { ThemeToggle } from "../ui/theme-toggle"
 import { ButtonHeaderAction } from "../ui/buttons-header"
-import { useContext } from "react";
-import { UserContext } from "../../contexts/user-context";
-import { UserDropdown } from "../ui/user-dropdown";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react"
+import { UserContext } from "../../contexts/user-context"
+import { UserDropdown } from "../ui/user-dropdown"
+import { Link, useNavigate } from "react-router-dom"
+import { SearchMd, SearchSm } from "../ui/search"
+import { Sidebar } from "./sidebar"
 
 const Header = () => {
   const navigate = useNavigate();
@@ -23,24 +25,21 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="backdrop-blur dark:text-white bg-[rgba(255,255,255,0.4)] dark:bg-[rgba(0,0,0,0.3)] flex items-center justify-between gap-4 p-4">
-        {/* Menu */}
-        <div className="w-full flex justify-start">
-          <button className="md:hidden">
-            <Menu className="h-6 w-6" />
-          </button>
+      <div className="relative backdrop-blur dark:text-white bg-[rgba(255,255,255,0.4)] dark:bg-[rgba(0,0,0,0.6)] flex items-center justify-between gap-4 p-4 py-3">
+        <Sidebar />
+
+        <div className="flex justify-left md:px-5">
+          <Link to="/">
+            <h1 className="text-xl tracking-wider">MONOCHROME</h1>
+          </Link>
         </div>
 
-        {/* Logo */}
-        <div className="w-full flex justify-center">
-          <h1 className="text-xl tracking-wider">MONOCHROME</h1>
-        </div>
+        {/* Search mobile */}
+        <SearchSm />
 
         {/* Actions desktop */}
-        <div className="w-full hidden md:flex justify-end items-center gap-4">
-          <ButtonHeaderAction>
-            <Search className="h-5 w-5" />
-          </ButtonHeaderAction>
+        <div className="hidden md:flex w-full justify-end items-center gap-4">
+          <SearchMd />
 
           {!loading && (
             user ? (
@@ -67,13 +66,6 @@ const Header = () => {
           </ButtonHeaderAction>
 
           <ThemeToggle />
-        </div>
-
-        {/* Actions mobile */}
-        <div className="w-full flex justify-end items-center md:hidden">
-          <ButtonHeaderAction>
-            <Search className="h-5 w-5" />
-          </ButtonHeaderAction>
         </div>
       </div>
 
